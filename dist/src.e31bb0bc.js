@@ -117,16 +117,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"model.js":[function(require,module,exports) {
+})({"../assets/image.jpg":[function(require,module,exports) {
+module.exports = "/image.08b77ca5.jpg";
+},{}],"model.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.model = void 0;
+var _image = _interopRequireDefault(require("../assets/image.jpg"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var model = [{
   type: "title",
-  value: "Hello world"
+  value: "Конструктор сайтов на JavaScript",
+  options: {
+    tag: 'h2',
+    // styles : `background: linear-gradient(to right, #ff0099, #493240); color: #fff`,
+    styles: {
+      background: 'linear-gradient(to right, #ff0099, #493240)',
+      color: '#fff',
+      'text-align': 'center',
+      'padding': '1.5rem'
+    }
+  }
 }, {
   type: "text",
   value: "value text sndvlnsdlvndlbnkl sndvbndfklbknd jsnsdnlfbnkdfjnbdnfbkndjkbnjkdnbjkdnk"
@@ -135,10 +149,10 @@ var model = [{
   value: ["1111", "2222", "3333", "4444 "]
 }, {
   type: "image",
-  value: "./assets/image.jpg"
+  value: _image.default
 }];
 exports.model = model;
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"../assets/image.jpg":"../assets/image.jpg"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -193,31 +207,67 @@ module.exports = reloadCSS;
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.col = col;
+exports.css = css;
+exports.row = row;
+function row(content) {
+  var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  return "<div style=\"".concat(styles, "\" class=\"row\">\n        ").concat(content, "\n    </div>");
+}
+function col(content) {
+  return "<div class=\"col-sm\">\n        ".concat(content, "\n    </div>");
+}
+function css() {
+  var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var keys = Object.keys(styles);
+  var array = keys.map(function (item) {
+    return "".concat(item, " : ").concat(styles[item]);
+  });
+  return array.join(';');
+}
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _model = require("./model");
 require("./styles/main.css");
+var _utils = require("./utils");
 var site = document.querySelector("#site");
 _model.model.forEach(function (item) {
   title(item);
 });
 function title(obj) {
+  var tag = 'h1';
+  var styles = '';
+  if ('options' in obj) {
+    if ('tag' in obj.options) {
+      tag = obj.options.tag;
+    }
+    if ('styles' in obj.options) {
+      styles = obj.options.styles;
+    }
+  }
+  console.log();
   if (obj.type === "title") {
-    site.insertAdjacentHTML("beforeend", "\n        <div class=\"row\">\n            <div class=\"col-sm\">\n                <h1>".concat(obj.value, "</h1>\n            </div>\n            \n        </div>\n        "));
+    site.insertAdjacentHTML("beforeend", (0, _utils.row)((0, _utils.col)("<".concat(tag, ">").concat(obj.value, "</").concat(tag, ">")), (0, _utils.css)(styles)));
   } else if (obj.type === "text") {
-    site.insertAdjacentHTML("beforeend", "\n        <div class=\"row\">\n            <div class=\"col-sm\">\n                <p>".concat(obj.value, "</p>\n            </div>\n            \n        </div>\n        "));
+    site.insertAdjacentHTML("beforeend", (0, _utils.row)((0, _utils.col)("<p>".concat(obj.value, "</p>"))));
   } else if (obj.type === "column") {
     var html = "";
     obj.value.forEach(function (c) {
-      html += "\n        <div class=\"col-sm\">\n            ".concat(c, "\n        </div>\n        ");
+      html += (0, _utils.col)(c);
     });
-    site.insertAdjacentHTML('beforeend', "\n    <div class=\"row\">\n        ".concat(html, "\n    </div>\n    "));
-  } else if (obj.type === 'image') {
-    site.insertAdjacentHTML('beforeend', "\n    <div class=\"row\">\n        <img src=\"".concat(obj.value, "\"/>\n    </div>\n    "));
+    site.insertAdjacentHTML("beforeend", (0, _utils.row)(html));
+  } else if (obj.type === "image") {
+    site.insertAdjacentHTML("beforeend", (0, _utils.row)("<img src=\"".concat(obj.value, "\"/>")));
   }
 }
-},{"./model":"model.js","./styles/main.css":"styles/main.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./model":"model.js","./styles/main.css":"styles/main.css","./utils":"utils.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -242,7 +292,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49138" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49710" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

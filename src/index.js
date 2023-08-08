@@ -1,5 +1,6 @@
-import {model} from './model'
-import './styles/main.css'
+import { model } from "./model"
+import "./styles/main.css"
+import { row, col, css } from "./utils"
 
 const site = document.querySelector("#site")
 
@@ -8,55 +9,29 @@ model.forEach((item) => {
 })
 
 function title(obj) {
+  let tag = 'h1'
+  let styles = ''
+  if ('options' in obj){
+    if ('tag' in obj.options){
+        tag = obj.options.tag
+    }
+    if ('styles' in obj.options){
+      styles = obj.options.styles
+    }
+  }
+  console.log()
   if (obj.type === "title") {
-    site.insertAdjacentHTML(
-      "beforeend",
-      `
-        <div class="row">
-            <div class="col-sm">
-                <h1>${obj.value}</h1>
-            </div>
-            
-        </div>
-        `
-    )
+    site.insertAdjacentHTML("beforeend", row(col(`<${tag}>${obj.value}</${tag}>`),
+    css(styles)))
   } else if (obj.type === "text") {
-    site.insertAdjacentHTML(
-      "beforeend",
-      `
-        <div class="row">
-            <div class="col-sm">
-                <p>${obj.value}</p>
-            </div>
-            
-        </div>
-        `
-    )
+    site.insertAdjacentHTML("beforeend", row(col(`<p>${obj.value}</p>`)))
   } else if (obj.type === "column") {
     let html = ``
-    obj.value.forEach((c)=>{
-        html += 
-        `
-        <div class="col-sm">
-            ${c}
-        </div>
-        `
+    obj.value.forEach((c) => {
+      html += col(c)
     })
-    site.insertAdjacentHTML('beforeend', 
-    `
-    <div class="row">
-        ${html}
-    </div>
-    `
-    )
-  }
-  else if (obj.type === 'image'){
-    site.insertAdjacentHTML('beforeend', 
-    `
-    <div class="row">
-        <img src="${obj.value}"/>
-    </div>
-    `
-    )
+    site.insertAdjacentHTML("beforeend", row(html))
+  } else if (obj.type === "image") {
+    site.insertAdjacentHTML("beforeend", row(`<img src="${obj.value}"/>`))
   }
 }
