@@ -4,7 +4,8 @@
   "description": "javascript pure application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "parcel ./src/index.html -p 3000 --open",
+    "build": "parcel build ./scr/index.html" 
   },
   "keywords": [
     "js",
