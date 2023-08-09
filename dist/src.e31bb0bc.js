@@ -119,6 +119,59 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"../assets/image.jpg":[function(require,module,exports) {
 module.exports = "/image.08b77ca5.jpg";
+},{}],"../classes/blocks.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Text = exports.Image = exports.Columns = exports.Block = void 0;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var Block = /*#__PURE__*/_createClass(function Block(type, value, options) {
+  _classCallCheck(this, Block);
+  this.type = type;
+  this.value = value;
+  this.options = options;
+});
+exports.Block = Block;
+var Text = /*#__PURE__*/function (_Block) {
+  _inherits(Text, _Block);
+  var _super = _createSuper(Text);
+  function Text(type, value, options) {
+    _classCallCheck(this, Text);
+    return _super.call(this, 'text', value, options);
+  }
+  return _createClass(Text);
+}(Block);
+exports.Text = Text;
+var Columns = /*#__PURE__*/_createClass(function Columns(type, value) {
+  _classCallCheck(this, Columns);
+  this.type = type;
+  this.value = value;
+});
+exports.Columns = Columns;
+var Image = /*#__PURE__*/function (_Block2) {
+  _inherits(Image, _Block2);
+  var _super2 = _createSuper(Image);
+  function Image(type, value, options) {
+    _classCallCheck(this, Image);
+    return _super2.call(this, 'image', value, options);
+  }
+  return _createClass(Image);
+}(Block);
+exports.Image = Image;
 },{}],"model.js":[function(require,module,exports) {
 "use strict";
 
@@ -127,32 +180,32 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.model = void 0;
 var _image = _interopRequireDefault(require("../assets/image.jpg"));
+var _blocks = require("../classes/blocks");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var model = [{
-  type: "title",
-  value: "Конструктор сайтов на JavaScript",
-  options: {
-    tag: 'h2',
-    // styles : `background: linear-gradient(to right, #ff0099, #493240); color: #fff`,
-    styles: {
-      background: 'linear-gradient(to right, #ff0099, #493240)',
-      color: '#fff',
-      'text-align': 'center',
-      'padding': '1.5rem'
-    }
+var model = [new _blocks.Block("title", "Конструктор сайтов на JavaScript", {
+  tag: "h2",
+  styles: {
+    background: "linear-gradient(to right, #ff0099, #493240)",
+    color: "#fff",
+    "text-align": "center",
+    padding: "1.5rem"
   }
-}, {
-  type: "text",
-  value: "value text sndvlnsdlvndlbnkl sndvbndfklbknd jsnsdnlfbnkdfjnbdnfbkndjkbnjkdnbjkdnk"
-}, {
-  type: "column",
-  value: ["1111", "2222", "3333", "4444 "]
-}, {
-  type: "image",
-  value: _image.default
-}];
+}), new _blocks.Text("text", "Тренировочный проект на чистом JavaScript", {
+  styles: {
+    "text-align": "center",
+    "font-size": "20px"
+  }
+}), new _blocks.Columns("column", ["1111", "2222", "3333", "4444", "5555"]), new _blocks.Image("image", _image.default, {
+  styles: {
+    height: "600px",
+    width: "700px",
+    top: 0,
+    left: 0,
+    margin: "auto"
+  }
+})];
 exports.model = model;
-},{"../assets/image.jpg":"../assets/image.jpg"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"../assets/image.jpg":"../assets/image.jpg","../classes/blocks":"../classes/blocks.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -213,6 +266,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.block = block;
 exports.col = col;
 exports.css = css;
 exports.row = row;
@@ -231,43 +285,133 @@ function css() {
   });
   return array.join(';');
 }
-},{}],"index.js":[function(require,module,exports) {
+function block(type) {
+  return "\n    <form>\n        <h5>".concat(type, "</h5>\n        <div class=\"form-group\">\n            <input class=\"form-control form-control-sm\" name=\"value\" placeholder=\"value\">\n        </div>\n        <div class=\"form-group\">\n        <input class=\"form-control form-control-sm\" name=\"styles\" placeholder=\"styles\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary btn-sm\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C</button>\n    </form>\n    <hr />\n    ");
+}
+},{}],"../classes/site.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Site = void 0;
+var _utils = require("../src/utils");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var Site = /*#__PURE__*/function () {
+  function Site(selector) {
+    _classCallCheck(this, Site);
+    this.el = document.querySelector(selector);
+  }
+  _createClass(Site, [{
+    key: "render",
+    value: function render(model) {
+      var _this = this;
+      model.forEach(function (item) {
+        _this.title(item);
+      });
+    }
+  }, {
+    key: "title",
+    value: function title(obj) {
+      var tag = "h1";
+      var styles = "";
+      if ("options" in obj) {
+        if ("tag" in obj.options) {
+          tag = obj.options.tag;
+        }
+        if ("styles" in obj.options) {
+          styles = obj.options.styles;
+        }
+      }
+      if (obj.type === "title") {
+        site.insertAdjacentHTML("beforeend", (0, _utils.row)((0, _utils.col)("<".concat(tag, ">").concat(obj.value, "</").concat(tag, ">")), (0, _utils.css)(styles)));
+      } else if (obj.type === "text") {
+        site.insertAdjacentHTML("beforeend", (0, _utils.row)((0, _utils.col)("<p>".concat(obj.value, "</p>")), (0, _utils.css)(styles)));
+      } else if (obj.type === "column") {
+        var html = "";
+        obj.value.forEach(function (c) {
+          html += (0, _utils.col)(c);
+        });
+        site.insertAdjacentHTML("beforeend", (0, _utils.row)(html));
+      } else if (obj.type === "image") {
+        site.insertAdjacentHTML("beforeend", (0, _utils.row)("<img src=\"".concat(obj.value, "\"/>"), (0, _utils.css)(styles)));
+      }
+    }
+  }]);
+  return Site;
+}();
+exports.Site = Site;
+},{"../src/utils":"utils.js"}],"../classes/sidebar.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SideBar = void 0;
+var _utils = require("../src/utils");
+var _blocks = require("../classes/blocks");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var SideBar = /*#__PURE__*/function () {
+  function SideBar(selector) {
+    _classCallCheck(this, SideBar);
+    this.el = document.querySelector(selector);
+    this.init();
+  }
+  _createClass(SideBar, [{
+    key: "init",
+    value: function init() {
+      this.el.insertAdjacentHTML('afterbegin', this.template);
+      this.el.addEventListener('submit', this.add);
+    }
+  }, {
+    key: "template",
+    get: function get() {
+      return (0, _utils.block)('text');
+    }
+  }, {
+    key: "add",
+    value: function add(event) {
+      event.preventDefault();
+      var type = event.target.name;
+      var value = event.target.value.value;
+      var styles = event.target.styles.value;
+      var newBlock;
+      if (type === 'text') {
+        newBlock = new _blocks.Text('text', value, {
+          styles: styles
+        });
+      } else {
+        newBlock = new _blocks.Block('title', value, {
+          styles: styles
+        });
+      }
+      console.log(newBlock);
+    }
+  }]);
+  return SideBar;
+}();
+exports.SideBar = SideBar;
+},{"../src/utils":"utils.js","../classes/blocks":"../classes/blocks.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _model = require("./model");
 require("./styles/main.css");
-var _utils = require("./utils");
-var site = document.querySelector("#site");
-_model.model.forEach(function (item) {
-  title(item);
-});
-function title(obj) {
-  var tag = 'h1';
-  var styles = '';
-  if ('options' in obj) {
-    if ('tag' in obj.options) {
-      tag = obj.options.tag;
-    }
-    if ('styles' in obj.options) {
-      styles = obj.options.styles;
-    }
-  }
-  console.log();
-  if (obj.type === "title") {
-    site.insertAdjacentHTML("beforeend", (0, _utils.row)((0, _utils.col)("<".concat(tag, ">").concat(obj.value, "</").concat(tag, ">")), (0, _utils.css)(styles)));
-  } else if (obj.type === "text") {
-    site.insertAdjacentHTML("beforeend", (0, _utils.row)((0, _utils.col)("<p>".concat(obj.value, "</p>"))));
-  } else if (obj.type === "column") {
-    var html = "";
-    obj.value.forEach(function (c) {
-      html += (0, _utils.col)(c);
-    });
-    site.insertAdjacentHTML("beforeend", (0, _utils.row)(html));
-  } else if (obj.type === "image") {
-    site.insertAdjacentHTML("beforeend", (0, _utils.row)("<img src=\"".concat(obj.value, "\"/>")));
-  }
-}
-},{"./model":"model.js","./styles/main.css":"styles/main.css","./utils":"utils.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var _site = require("../classes/site");
+var _sidebar = require("../classes/sidebar");
+var site = new _site.Site('#site');
+site.render(_model.model);
+var sidebar = new _sidebar.SideBar('#panel');
+},{"./model":"model.js","./styles/main.css":"styles/main.css","../classes/site":"../classes/site.js","../classes/sidebar":"../classes/sidebar.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -292,7 +436,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49710" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53851" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
