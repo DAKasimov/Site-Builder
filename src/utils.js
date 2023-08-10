@@ -11,6 +11,9 @@ export function col(content){
 }
 
 export function css(styles = {}){
+    if (typeof styles === 'string'){
+        return styles
+    }
     const keys = Object.keys(styles)
     const array = keys.map((item)=>{
         return `${item} : ${styles[item]}`

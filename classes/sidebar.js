@@ -2,19 +2,21 @@ import {block} from '../src/utils'
 import {Text, Block} from '../classes/blocks'
 
 export class SideBar{
-    constructor(selector){
+    constructor(selector, updateCallback){
         this.el = document.querySelector(selector)
+        this.update = updateCallback
         this.init()
         
     }
 
     init(){
         this.el.insertAdjacentHTML('afterbegin', this.template)
-        this.el.addEventListener('submit', this.add)
+        this.el.addEventListener('submit', this.add.bind(this))
     }
 
     get template(){
-        return block('text')
+
+        return block('title')
     }
 
     add(event){
@@ -23,17 +25,12 @@ export class SideBar{
         const value = event.target.value.value
         const styles = event.target.styles.value
 
-        let newBlock
-
-        if (type === 'text'){
-
-            newBlock = new Text('text', value, {styles})
-
-        }else {
-            newBlock = new Block('title', value, {styles})
-        }
-
+        const newBlock = type === 'text' ? new Text('text', value, {styles}) : new Block('title', value, {styles})
         console.log(newBlock)
+        this.update(newBlock)
+
+        event.target.value.value = ''
+        event.target.styles.value = ''
     }
 }
 

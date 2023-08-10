@@ -6,6 +6,7 @@ export class Site {
   }
 
   render(model) {
+    this.el.innerHTML = ''
     model.forEach((item) => {
       this.title(item)
     })
